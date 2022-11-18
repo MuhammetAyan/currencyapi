@@ -10,7 +10,7 @@ services:
     ports:
       - '5432:5432'
     networks:
-      - postgres
+      - currencyapi
     volumes: 
       - db:/var/lib/postgresql/data
       - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
@@ -28,7 +28,7 @@ services:
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     networks:
-      - postgres
+      - currencyapi
     restart: unless-stopped
   
   currencyapi:
@@ -39,12 +39,12 @@ services:
       - currencyapi_db
     tty: true # terminali sürekli açık tutmak için
     env_file:
-      - .env
+      - currencyapi_app/.env
     networks:
-      - postgres
+      - currencyapi
 
 networks:
-  postgres:
+  currencyapi:
     driver: bridge
 
 volumes:
