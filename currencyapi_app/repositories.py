@@ -3,8 +3,9 @@ import psycopg2
 
 class CurrencyRepository:
 
-    def __init__(self, dbname:str, user:str, password:str) -> None:
-        self.conn = psycopg2.connect(f'dbname="{dbname}" user="{user}" password="{password}"')
+    def __init__(self, dbname:str, user:str, password:str, host:str, port:str='5432') -> None:
+        # self.conn = psycopg2.connect(f'dbname={dbname} user={user} password={password} host={host} port={port}')
+        self.conn = psycopg2.connect(database = dbname, host=host, user=user, password=password, port=port)
         
 
     def insert_currency(self, data) -> None:
